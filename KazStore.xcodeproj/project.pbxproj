@@ -56,15 +56,95 @@
 		6E6240282BBFE3E9005660C8 /* KazStore */ = {
 			isa = PBXGroup;
 			children = (
-				6E6240292BBFE3E9005660C8 /* AppDelegate.swift */,
-				6E62402B2BBFE3E9005660C8 /* SceneDelegate.swift */,
-				6E62402D2BBFE3E9005660C8 /* ViewController.swift */,
-				6E62402F2BBFE3E9005660C8 /* Main.storyboard */,
-				6E6240322BBFE3EA005660C8 /* Assets.xcassets */,
-				6E6240342BBFE3EA005660C8 /* LaunchScreen.storyboard */,
-				6E6240372BBFE3EA005660C8 /* Info.plist */,
+				6E6240422BBFE685005660C8 /* App */,
+				6E6240432BBFE687005660C8 /* Config */,
+				6E62403E2BBFE641005660C8 /* Extension */,
+				6E62403F2BBFE661005660C8 /* Main */,
+				6E62403D2BBFE635005660C8 /* Manager */,
+				6E6240452BBFE6A0005660C8 /* Model */,
+				6E6240462BBFE6BE005660C8 /* Repository */,
+				6E6240442BBFE698005660C8 /* Resource */,
 			);
 			path = KazStore;
+			sourceTree = "<group>";
+		};
+		6E62403D2BBFE635005660C8 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		6E62403E2BBFE641005660C8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		6E62403F2BBFE661005660C8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6E62402D2BBFE3E9005660C8 /* ViewController.swift */,
+				6E6240412BBFE681005660C8 /* TabBar */,
+				6E6240402BBFE67F005660C8 /* Base */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		6E6240402BBFE67F005660C8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		6E6240412BBFE681005660C8 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		6E6240422BBFE685005660C8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6E6240292BBFE3E9005660C8 /* AppDelegate.swift */,
+				6E62402B2BBFE3E9005660C8 /* SceneDelegate.swift */,
+				6E6240342BBFE3EA005660C8 /* LaunchScreen.storyboard */,
+				6E62402F2BBFE3E9005660C8 /* Main.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6E6240432BBFE687005660C8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				6E6240372BBFE3EA005660C8 /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		6E6240442BBFE698005660C8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				6E6240322BBFE3EA005660C8 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		6E6240452BBFE6A0005660C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6E6240462BBFE6BE005660C8 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,12 +374,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KazStore/Info.plist;
+				INFOPLIST_FILE = KazStore/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,9 +388,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.KazStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -322,12 +407,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = KazStore/Info.plist;
+				INFOPLIST_FILE = KazStore/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -335,9 +421,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.KazStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
