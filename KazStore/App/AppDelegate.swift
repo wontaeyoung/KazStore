@@ -11,7 +11,8 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    setGlobalNavigationBarAppearance()
     return true
   }
 
@@ -27,5 +28,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the user discards a scene session.
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+  }
+  
+  private func setGlobalNavigationBarAppearance() {
+    
+    UINavigationBar.appearance().configure {
+      let appearance = UINavigationBarAppearance().configured {
+        $0.titleTextAttributes = [.foregroundColor: KSAsset.Color.primary]
+        $0.largeTitleTextAttributes = [.foregroundColor: KSAsset.Color.primary]
+      }
+      
+      $0.standardAppearance = appearance
+      $0.compactAppearance = appearance
+      $0.scrollEdgeAppearance = appearance
+      $0.compactScrollEdgeAppearance = appearance
+    }
   }
 }
