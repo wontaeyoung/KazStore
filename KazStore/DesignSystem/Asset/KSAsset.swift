@@ -10,7 +10,11 @@ import UIKit
 enum KSAsset {
   
   enum Color {
-    static let primary: UIColor = .init(hex: "#FFC94A")
+    static let primary: UIColor = .init(hex: "#ED6D33")
+    static let secondary: UIColor = .init(hex: "#F3B490")
+    static let lightGrayBackground: UIColor = .init(hex: "#F2F2F6")
+    static let lightGrayForeground: UIColor = .init(hex: "#BCBCBC")
+    static let darkGray: UIColor = .init(hex: "#686868")
     static let background: UIColor = .background
   }
   
@@ -46,11 +50,30 @@ enum KSAsset {
   enum Symbol {
     
     private enum SF: String {
-      case star = "star"
+      case docTextImage = "doc.text.image"
+      case docTextImageFill = "doc.text.image.fill"
+      case gamecontroller = "gamecontroller"
+      case gamecontrollerFill = "gamecontroller.fill"
+      case squareStack3dUp = "square.stack.3d.up"
+      case squareStack3dUpFill = "square.stack.3d.up.fill"
+      case arcadeStickConsole = "arcade.stick.console"
+      case arcadeStickConsoleFill = "arcade.stick.console.fill"
+      case magnifyingglass = "magnifyingglass"
     }
     
     private static func image(_ sf: SF) -> UIImage? {
       return UIImage(systemName: sf.rawValue)
     }
+    
+    static let todayTabIcon: UIImage? = image(.docTextImage)
+    static let todaySelectedTabIcon: UIImage? = image(.docTextImageFill)
+    static let gameTabIcon: UIImage? = image(.gamecontroller)
+    static let gameSelectedTabIcon: UIImage? = image(.gamecontrollerFill)
+    static let appTabIcon: UIImage? = image(.squareStack3dUp)
+    static let appSelectedTabIcon: UIImage? = image(.squareStack3dUpFill)
+    static let arcadeTabIcon: UIImage? = image(.arcadeStickConsole)
+    static let arcadeSelectedTabIcon: UIImage? = image(.arcadeStickConsoleFill)
+    static let searchTabIcon: UIImage? = image(.magnifyingglass)
+    static let searchSelectedTabIcon: UIImage? = image(.magnifyingglass)
   }
 }
