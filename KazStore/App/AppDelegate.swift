@@ -30,6 +30,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     UINavigationBar.appearance().configure {
       let appearance = UINavigationBarAppearance().configured {
+        $0.backgroundColor = KSAsset.Color.background
         $0.titleTextAttributes = [.foregroundColor: KSAsset.Color.primary]
         $0.largeTitleTextAttributes = [.foregroundColor: KSAsset.Color.primary]
       }
