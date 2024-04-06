@@ -45,6 +45,7 @@ enum KSAsset {
     }
     
     static let ksPrimaryButtonTitle: UIFont = font(.bold, size: 19)
+    static let ksSearchField: UIFont = font(.medium, size: 15)
   }
   
   enum Symbol {
