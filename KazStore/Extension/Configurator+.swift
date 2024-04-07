@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 protocol Configurator { }
 
@@ -40,7 +41,6 @@ extension Array: Configurator { }
 extension Dictionary: Configurator { }
 extension Set: Configurator { }
 
-
 extension UIButton.Configuration: Configurator { }
 extension URLRequest: Configurator { }
 
@@ -57,3 +57,5 @@ extension NSDiffableDataSourceSnapshot: Configurator { }
 
 extension UIListContentConfiguration.TextProperties: Configurator { }
 extension UIListContentConfiguration.ImageProperties: Configurator { }
+
+extension ToastStyle: Configurator { }
