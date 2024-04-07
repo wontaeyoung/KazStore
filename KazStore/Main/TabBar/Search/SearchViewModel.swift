@@ -5,6 +5,7 @@
 //  Created by 원태영 on 4/5/24.
 //
 
+import Foundation
 import RxSwift
 import RxCocoa
 
@@ -13,6 +14,7 @@ final class SearchViewModel: ViewModel {
   // MARK: - I / O
   struct Input {
     let searchEvent: PublishRelay<String>
+    let downloadTapEvent: PublishRelay<URL?>
   }
   
   struct Output {
@@ -48,7 +50,38 @@ final class SearchViewModel: ViewModel {
       .bind(to: apps)
       .disposed(by: disposeBag)
     
+    input.downloadTapEvent
+      .flatMap { url -> Observable<URL> in
+        guard let url else { return Observable.error(SearchError.invalidDownloadURL) }
+        
+        return .just(url)
+      }
+      .thread(.main)
+      .subscribe(with: self, onNext: { owner, url in
+        owner.coordinator?.showDownloadWebView(url: url)
+      }, onError: { owner, error in
+        owner.coordinator?.showErrorAlert(error: error)
+      })
+      .disposed(by: disposeBag)
+    
     return Output(apps: apps.asDriver())
   }
 }
 
+enum SearchError: AppError {
+  case invalidDownloadURL
+  
+  var logDescription: String {
+    switch self {
+      case .invalidDownloadURL:
+        return "다운로드 URL 변환 실패"
+    }
+  }
+  
+  var alertDescription: String {
+    switch self {
+      case .invalidDownloadURL:
+        return "다운로드 주소가 등록되어있지 않은 앱이에요."
+    }
+  }
+}
