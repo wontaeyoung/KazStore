@@ -19,6 +19,7 @@ final class SearchViewModel: ViewModel {
   
   struct Output {
     let apps: Driver<[App]>
+    let searchCompleted: Driver<Void>
   }
   
   // MARK: - Property
@@ -35,6 +36,7 @@ final class SearchViewModel: ViewModel {
   func transform(input: Input) -> Output {
     
     let apps = BehaviorRelay<[App]>(value: [])
+    let searchCompleted = PublishRelay<Void>()
     
     input.searchEvent
       .thread(.global)
@@ -47,6 +49,9 @@ final class SearchViewModel: ViewModel {
             return .just([])
           }
       }
+      .do(onNext: { _ in
+        searchCompleted.accept(())
+      })
       .bind(to: apps)
       .disposed(by: disposeBag)
     
@@ -64,7 +69,16 @@ final class SearchViewModel: ViewModel {
       })
       .disposed(by: disposeBag)
     
-    return Output(apps: apps.asDriver())
+    return Output(
+      apps: apps.asDriver(),
+      searchCompleted: searchCompleted.asDriver(onErrorJustReturn: ())
+    )
+  }
+  
+  private func fakeDownload() -> Single<Void> {
+    return Observable.just(())
+      .delay(.seconds(3), scheduler: MainScheduler.instance)
+      .asSingle()
   }
 }
 

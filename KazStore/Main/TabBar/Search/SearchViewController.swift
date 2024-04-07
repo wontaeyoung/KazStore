@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import Toast
 
 final class SearchViewController: RxBaseViewController, ViewModelController {
   
@@ -20,6 +21,9 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
     $0.rowHeight = 80
     $0.separatorStyle = .none
   }
+  
+  // MARK: - Observable
+  private let isSearching = BehaviorRelay<Bool>(value: false)
   
   // MARK: - Property
   let viewModel: SearchViewModel
@@ -55,6 +59,7 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
       searchEvent: .init(),
       downloadTapEvent: .init()
     )
+    
     let output = viewModel.transform(input: input)
     
     output.apps
@@ -66,14 +71,35 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
       }
       .disposed(by: disposeBag)
     
+    output.searchCompleted
+      .map { false }
+      .drive(isSearching)
+      .disposed(by: disposeBag)
+    
     searchField.rx.controlEvent(.editingDidEndOnExit)
       .debounce(.seconds(1), scheduler: MainScheduler.instance)
       .withLatestFrom(searchField.rx.text.orEmpty)
       .distinctUntilChanged()
-      .bind(to: input.searchEvent)
+      .filter { !$0.isEmpty }
+      .bind(with: self, onNext: { owner, query in
+        owner.isSearching.accept(true)
+        input.searchEvent.accept(query)
+      })
+      .disposed(by: disposeBag)
+    
+    isSearching
+      .bind(with: self) { owner, isSearching in
+        owner.toggleLoadingIndicator(isOn: isSearching)
+      }
       .disposed(by: disposeBag)
   }
   
   // MARK: - Method
-  
+  private func toggleLoadingIndicator(isOn: Bool) {
+    if isOn {
+      view.makeToastActivity(.center)
+    } else {
+      view.hideToastActivity()
+    }
+  }
 }
