@@ -14,6 +14,12 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   
   // MARK: - UI
   private let searchField = KSTextField(placeholder: "앱 이름", style: .search)
+  private lazy var searchResultTableView = UITableView().configured {
+    $0.register(SearchTableCell.self, forCellReuseIdentifier: SearchTableCell.identifier)
+    $0.keyboardDismissMode = .onDrag
+    $0.rowHeight = 80
+    $0.separatorStyle = .none
+  }
   
   // MARK: - Property
   let viewModel: SearchViewModel
@@ -27,7 +33,7 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   
   // MARK: - Life Cycle
   override func setHierarchy() {
-    view.addSubviews(searchField)
+    view.addSubviews(searchField, searchResultTableView)
   }
   
   override func setConstraint() {
@@ -36,15 +42,27 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
       make.horizontalEdges.equalTo(view).inset(20)
       make.height.equalTo(35)
     }
+    
+    searchResultTableView.snp.makeConstraints { make in
+      make.top.equalTo(searchField.snp.bottom)
+      make.horizontalEdges.equalTo(view)
+      make.bottom.equalTo(view.safeAreaLayoutGuide)
+    }
   }
   
   override func bind() {
-    let input = SearchViewModel.Input(searchEvent: .init())
+    let input = SearchViewModel.Input(
+      searchEvent: .init(),
+      downloadTapEvent: .init()
+    )
     let output = viewModel.transform(input: input)
     
     output.apps
-      .drive(with: self) { owner, apps in
-        dump(apps)
+      .drive(searchResultTableView.rx.items(cellIdentifier: SearchTableCell.identifier, cellType: SearchTableCell.self)) { row, element, cell in
+        
+        cell.updateUI(with: element) {
+          input.downloadTapEvent.accept(element.downloadURL)
+        }
       }
       .disposed(by: disposeBag)
     
