@@ -13,7 +13,7 @@ import RxCocoa
 final class SearchViewController: RxBaseViewController, ViewModelController {
   
   // MARK: - UI
-  
+  private let searchField = KSTextField(placeholder: "앱 이름", style: .search)
   
   // MARK: - Property
   let viewModel: SearchViewModel
@@ -27,15 +27,33 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   
   // MARK: - Life Cycle
   override func setHierarchy() {
-    
+    view.addSubviews(searchField)
   }
   
   override func setConstraint() {
-    
+    searchField.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.horizontalEdges.equalTo(view).inset(20)
+      make.height.equalTo(35)
+    }
   }
   
   override func bind() {
-      
+    let input = SearchViewModel.Input(searchEvent: .init())
+    let output = viewModel.transform(input: input)
+    
+    output.apps
+      .drive(with: self) { owner, apps in
+        dump(apps)
+      }
+      .disposed(by: disposeBag)
+    
+    searchField.rx.controlEvent(.editingDidEndOnExit)
+      .debounce(.seconds(1), scheduler: MainScheduler.instance)
+      .withLatestFrom(searchField.rx.text.orEmpty)
+      .distinctUntilChanged()
+      .bind(to: input.searchEvent)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Method
