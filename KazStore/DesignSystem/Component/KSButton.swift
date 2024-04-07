@@ -101,13 +101,13 @@ extension KSButton {
       switch self {
         case .primary:
           return Style.primaryConfig
-        
+          
         case .secondary:
           return Style.secondaryConfig
-        
+          
         case .tertiary:
           return Style.tertiaryConfig
-        
+          
         case .tag:
           return Style.tagConfig
           
@@ -117,4 +117,3 @@ extension KSButton {
     }
   }
 }
-
