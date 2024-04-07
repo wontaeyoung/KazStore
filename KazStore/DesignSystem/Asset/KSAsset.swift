@@ -16,6 +16,7 @@ enum KSAsset {
     static let lightGrayForeground: UIColor = .init(hex: "#BCBCBC")
     static let darkGray: UIColor = .init(hex: "#686868")
     static let background: UIColor = .background
+    static let label: UIColor = .label
   }
   
   enum Font {
@@ -46,6 +47,7 @@ enum KSAsset {
     
     static let ksPrimaryButtonTitle: UIFont = font(.bold, size: 19)
     static let ksSearchField: UIFont = font(.medium, size: 15)
+    static let ksPrimaryLabel: UIFont = font(.bold, size: 17)
   }
   
   enum Symbol {
