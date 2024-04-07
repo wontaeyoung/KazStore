@@ -30,7 +30,7 @@ final class SearchTableCell: RxBaseTableViewCell {
   
   override func setConstraint() {
     appIconImageView.snp.makeConstraints { make in
-      make.leading.equalTo(contentView).inset(10)
+      make.leading.equalTo(contentView).inset(20)
       make.centerY.equalTo(contentView)
       make.size.equalTo(50)
     }
@@ -43,7 +43,7 @@ final class SearchTableCell: RxBaseTableViewCell {
     }
     
     downloadButton.snp.makeConstraints { make in
-      make.trailing.equalTo(contentView).inset(10)
+      make.trailing.equalTo(contentView).inset(20)
       make.centerY.equalTo(contentView)
       make.width.equalTo(80)
     }
