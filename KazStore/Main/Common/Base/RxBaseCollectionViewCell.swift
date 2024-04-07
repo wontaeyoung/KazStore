@@ -29,6 +29,7 @@ class RxBaseCollectionViewCell: UICollectionViewCell {
     setHierarchy()
     setConstraint()
     setAttribute()
+    bind()
   }
   
   @available(*, unavailable)
@@ -40,4 +41,5 @@ class RxBaseCollectionViewCell: UICollectionViewCell {
   func setHierarchy() { }
   func setConstraint() { }
   func setAttribute() { }
+  func bind() { }
 }
