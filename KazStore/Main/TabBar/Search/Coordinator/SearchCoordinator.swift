@@ -38,4 +38,10 @@ extension SearchCoordinator {
     
     push(vc)
   }
+  
+  func showDownloadWebView(url: URL) {
+    let vc = DownloadWebView(url: url)
+    
+    push(vc)
+  }
 }
