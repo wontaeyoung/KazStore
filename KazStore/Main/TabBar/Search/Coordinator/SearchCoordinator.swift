@@ -20,10 +20,22 @@ final class SearchCoordinator: Coordinator {
   }
   
   func start() {
-    
+    showSearchView()
   }
 }
 
 extension SearchCoordinator {
   
+  func showSearchView() {
+    let service = NetworkService()
+    let repository = AppRepository(networkService: service)
+    
+    let vm = SearchViewModel(appRepository: repository)
+      .coordinator(self)
+    
+    let vc = SearchViewController(viewModel: vm)
+      .hideBackTitle()
+    
+    push(vc)
+  }
 }

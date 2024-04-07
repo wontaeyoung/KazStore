@@ -53,11 +53,16 @@ final class MainTabBarCoordinator: Coordinator {
       $0.tabBarItem = page.tabBarItem
       connectTabFlow(page: page, tabPageController: $0)
     }
-    .navigationLargeTitleEnabled()
   }
   
   private func connectTabFlow(page: MainTabBarPage, tabPageController: UINavigationController) {
     switch page {
+      case .search:
+        let coordinator = SearchCoordinator(tabPageController)
+        addChild(coordinator)
+        coordinator.start()
+        coordinator.tabBarDelegate = self
+        
       default:
         print("-")
     }
