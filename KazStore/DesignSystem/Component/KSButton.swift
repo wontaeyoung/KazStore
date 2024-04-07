@@ -79,10 +79,8 @@ extension KSButton {
     
     private static let tagConfig: UIButton.Configuration = .filled().applied {
       
-      $0.baseForegroundColor = KSAsset.Color.primary
-      $0.baseBackgroundColor = KSAsset.Color.primary
       $0.buttonSize = .mini
-      $0.cornerStyle = .large
+      $0.cornerStyle = .capsule
       
       $0.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
         return $0.applied { $0.font = KSAsset.Font.ksPrimaryButtonTitle }
