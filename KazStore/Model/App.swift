@@ -38,6 +38,14 @@ struct App: DefaultValueProvidable {
   let userRatingCount: Int               /// 리뷰 갯수
   let sellerUrl: String                  /// 판매자 사이트
   
+  var appIconURL: URL? {
+    return URL(string: artworkUrl512)
+  }
+  
+  var downloadURL: URL? {
+    return URL(string: trackViewUrl)
+  }
+  
   enum CodingKeys: CodingKey {
     case screenshotUrls
     case artworkUrl512
