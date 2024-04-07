@@ -13,21 +13,30 @@ class KSLabel: UILabel {
   
   override var text: String? {
     didSet {
-      if true {
+      if false {
         applyLineSpacing()
       }
     }
   }
   
-  init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural) {
+  init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural, line: Int = 1) {
     self.style = style
     
     super.init(frame: .zero)
     
-    self.text = title
-    self.textAlignment = alignment
+    self.configure {
+      $0.text = title
+      $0.textAlignment = alignment
+      $0.numberOfLines = line
+    }
     
-    switch style { }
+    switch style { 
+      case .primary:
+        self.configure {
+          $0.font = KSAsset.Font.ksPrimaryLabel
+          $0.textColor = KSAsset.Color.label
+        }
+    }
   }
   
   @available(*, unavailable)
@@ -39,7 +48,7 @@ class KSLabel: UILabel {
 extension KSLabel {
   
   enum Style {
-    
+    case primary
   }
   
   func applyLineSpacing() {
