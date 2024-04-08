@@ -97,6 +97,12 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
       }
       .disposed(by: disposeBag)
     
+    searchResultTableView.rx.itemSelected
+      .bind(with: self) { owner, indexPath in
+        owner.searchResultTableView.deselectRow(at: indexPath, animated: true)
+      }
+      .disposed(by: disposeBag)
+    
     searchResultTableView.rx.modelSelected(App.self)
       .bind(to: input.appCellTapEvent)
       .disposed(by: disposeBag)
