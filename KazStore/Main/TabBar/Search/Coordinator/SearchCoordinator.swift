@@ -44,4 +44,13 @@ extension SearchCoordinator {
     
     push(vc)
   }
+  
+  func showSearchDetailView(app: App) {
+    let vm = SearchDetailViewModel()
+      .coordinator(self)
+    
+    let vc = SearchDetailViewController(viewModel: vm, app: app)
+    
+    push(vc)
+  }
 }
