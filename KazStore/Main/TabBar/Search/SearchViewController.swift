@@ -24,6 +24,7 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   
   // MARK: - Observable
   private let isSearching = BehaviorRelay<Bool>(value: false)
+  private let searchPaginationEvent = PublishRelay<Void>()
   
   // MARK: - Property
   let viewModel: SearchViewModel
@@ -60,6 +61,7 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   override func bind() {
     let input = SearchViewModel.Input(
       searchEvent: .init(),
+      searchPaginationEvent: searchPaginationEvent,
       downloadTapEvent: .init(),
       appCellTapEvent: .init()
     )
@@ -76,6 +78,9 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
       .disposed(by: disposeBag)
     
     output.searchCompleted
+      .do(onNext: { _ in
+        self.searchResultTableView.setContentOffset(.zero, animated: false)
+      })
       .map { false }
       .drive(isSearching)
       .disposed(by: disposeBag)
@@ -106,6 +111,18 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
     searchResultTableView.rx.modelSelected(App.self)
       .bind(to: input.appCellTapEvent)
       .disposed(by: disposeBag)
+    
+    searchResultTableView.rx.contentOffset
+      .throttle(.seconds(2), scheduler: MainScheduler.instance)
+      .withUnretained(self)
+      .map { owner, offset in
+        return owner.reachedBotton(offset: offset)
+      }
+      .filter { $0 }
+      .flatMap { _ in Observable<Void>.just(()) }
+      .debug(trimOutput: true)
+      .bind(to: searchPaginationEvent)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Method
@@ -115,5 +132,13 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
     } else {
       view.hideToastActivity()
     }
+  }
+  
+  private func reachedBotton(offset: CGPoint) -> Bool {
+    let tableViewHeight = searchResultTableView.frame.size.height
+    let contentHeight = searchResultTableView.contentSize.height
+    let threshold = max(contentHeight - tableViewHeight - 100, 0)
+    
+    return offset.y > threshold
   }
 }
