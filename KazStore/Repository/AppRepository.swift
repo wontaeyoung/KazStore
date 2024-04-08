@@ -15,8 +15,8 @@ final class AppRepository {
     self.networkService = networkService
   }
   
-  func fetch(query: String) -> Single<[App]> {
-    let router: ItunesAPIRouter = .app(query: query, limit: 10)
+  func fetch(query: String, offset: Int) -> Single<[App]> {
+    let router: ItunesAPIRouter = .app(query: query, limit: BusinessValue.ituensAPICallLimit, offset: offset)
     let response: Single<AppResponse> = networkService.callRequest(router: router)
     
     return response
