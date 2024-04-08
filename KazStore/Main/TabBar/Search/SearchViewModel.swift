@@ -15,6 +15,7 @@ final class SearchViewModel: ViewModel {
   struct Input {
     let searchEvent: PublishRelay<String>
     let downloadTapEvent: PublishRelay<URL?>
+    let appCellTapEvent: PublishRelay<App>
   }
   
   struct Output {
@@ -67,6 +68,12 @@ final class SearchViewModel: ViewModel {
       }, onError: { owner, error in
         owner.coordinator?.showErrorAlert(error: error)
       })
+      .disposed(by: disposeBag)
+    
+    input.appCellTapEvent
+      .bind(with: self) { owner, app in
+        owner.coordinator?.showSearchDetailView(app: app)
+      }
       .disposed(by: disposeBag)
     
     return Output(

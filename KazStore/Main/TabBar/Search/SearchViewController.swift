@@ -60,7 +60,8 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   override func bind() {
     let input = SearchViewModel.Input(
       searchEvent: .init(),
-      downloadTapEvent: .init()
+      downloadTapEvent: .init(),
+      appCellTapEvent: .init()
     )
     
     let output = viewModel.transform(input: input)
@@ -94,6 +95,10 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
       .bind(with: self) { owner, isSearching in
         owner.toggleLoadingIndicator(isOn: isSearching)
       }
+      .disposed(by: disposeBag)
+    
+    searchResultTableView.rx.modelSelected(App.self)
+      .bind(to: input.appCellTapEvent)
       .disposed(by: disposeBag)
   }
   
