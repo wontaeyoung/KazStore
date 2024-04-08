@@ -9,7 +9,7 @@ import Alamofire
 
 enum ItunesAPIRouter: AFRouter {
   
-  case app(query: String, limit: Int)
+  case app(query: String, limit: Int, offset: Int)
   
   var method: HTTPMethod {
     switch self {
@@ -35,10 +35,11 @@ enum ItunesAPIRouter: AFRouter {
   
   var parameters: Parameters? {
     switch self {
-      case .app(let query, let limit):
+      case let .app(query, limit, offset):
         return [
           ParameterKey.term.key: query,
           ParameterKey.limit.key: "\(limit)",
+          ParameterKey.offset.key: "\(offset)",
           ParameterKey.country.key: country,
           ParameterKey.entity.key: entity
         ]
@@ -59,6 +60,7 @@ enum ItunesAPIRouter: AFRouter {
   enum ParameterKey: String {
     case term
     case limit
+    case offset
     case country
     case entity
     
