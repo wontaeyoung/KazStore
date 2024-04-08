@@ -13,7 +13,7 @@ class KSLabel: UILabel {
   
   override var text: String? {
     didSet {
-      if false {
+      if case .content = style {
         applyLineSpacing()
       }
     }
@@ -80,4 +80,3 @@ extension KSLabel {
     }
   }
 }
-
