@@ -14,6 +14,7 @@ final class SearchViewModel: ViewModel {
   // MARK: - I / O
   struct Input {
     let searchEvent: PublishRelay<String>
+    let searchPaginationEvent: PublishRelay<Void>
     let downloadTapEvent: PublishRelay<URL?>
     let appCellTapEvent: PublishRelay<App>
   }
@@ -26,6 +27,7 @@ final class SearchViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: SearchCoordinator?
+  private var apiContainer = APIContainer()
   private let appRepository: AppRepository
   
   // MARK: - Initializer
@@ -42,13 +44,11 @@ final class SearchViewModel: ViewModel {
     input.searchEvent
       .thread(.global)
       .withUnretained(self)
+      .do(onNext: { owner, _ in
+        owner.apiContainer.resetPage()
+      })
       .flatMap { owner, query in
-        return owner.appRepository.fetch(query: query)
-          .catch {
-            LogManager.shared.log(with: $0, to: .network)
-            owner.coordinator?.showErrorAlert(error: $0)
-            return .just([])
-          }
+        return owner.requestApps(query: query)
       }
       .do(onNext: { _ in
         searchCompleted.accept(())
@@ -56,9 +56,24 @@ final class SearchViewModel: ViewModel {
       .bind(to: apps)
       .disposed(by: disposeBag)
     
+    input.searchPaginationEvent
+      .withLatestFrom(input.searchEvent)
+      .thread(.global)
+      .withUnretained(self)
+      .flatMap { owner, query in
+        return owner.requestApps(query: query)
+          .map { newApps in
+            return apps.value + newApps
+          }
+      }
+      .bind(to: apps)
+      .disposed(by: disposeBag)
+    
     input.downloadTapEvent
       .flatMap { url -> Observable<URL> in
-        guard let url else { return Observable.error(SearchError.invalidDownloadURL) }
+        guard let url else {
+          return Observable.error(SearchError.invalidDownloadURL)
+        }
         
         return .just(url)
       }
@@ -82,10 +97,41 @@ final class SearchViewModel: ViewModel {
     )
   }
   
+  private func requestApps(query: String) -> Single<[App]> {
+    return appRepository.fetch(query: query, offset: apiContainer.offset)
+      .do(onSuccess: { _ in
+        self.apiContainer.increasePage()
+      })
+      .catch { error in
+        LogManager.shared.log(with: error, to: .network)
+        self.coordinator?.showErrorAlert(error: error)
+        return .just([])
+      }
+  }
+  
   private func fakeDownload() -> Single<Void> {
     return Observable.just(())
       .delay(.seconds(3), scheduler: MainScheduler.instance)
       .asSingle()
+  }
+}
+
+extension SearchViewModel {
+  struct APIContainer {
+    let limit: Int = BusinessValue.ituensAPICallLimit
+    var page: Int = 0
+    
+    var offset: Int {
+      return limit * page
+    }
+    
+    mutating func increasePage() {
+      page += 1
+    }
+    
+    mutating func resetPage() {
+      page = 0
+    }
   }
 }
 
