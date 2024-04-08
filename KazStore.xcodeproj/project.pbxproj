@@ -59,6 +59,8 @@
 		6E6240C12BC2D803005660C8 /* KeyedDecodingContainer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240C02BC2D803005660C8 /* KeyedDecodingContainer+.swift */; };
 		6E6240C32BC2D82A005660C8 /* DefaultValueProvidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240C22BC2D82A005660C8 /* DefaultValueProvidable.swift */; };
 		6E6240C62BC2DE78005660C8 /* DownloadWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240C52BC2DE78005660C8 /* DownloadWebView.swift */; };
+		6E6240C92BC374F3005660C8 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240C82BC374F3005660C8 /* SearchDetailViewController.swift */; };
+		6E6240CB2BC37504005660C8 /* SearchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240CA2BC37504005660C8 /* SearchDetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +113,8 @@
 		6E6240C02BC2D803005660C8 /* KeyedDecodingContainer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedDecodingContainer+.swift"; sourceTree = "<group>"; };
 		6E6240C22BC2D82A005660C8 /* DefaultValueProvidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValueProvidable.swift; sourceTree = "<group>"; };
 		6E6240C52BC2DE78005660C8 /* DownloadWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadWebView.swift; sourceTree = "<group>"; };
+		6E6240C82BC374F3005660C8 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
+		6E6240CA2BC37504005660C8 /* SearchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +337,7 @@
 		6E62409D2BC01E3C005660C8 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				6E6240C72BC374E4005660C8 /* SearchDetailView */,
 				6E6240BB2BC2D68D005660C8 /* Cell */,
 				6E62409E2BC01E41005660C8 /* Coordinator */,
 				6E6240A02BC01E56005660C8 /* SearchViewController.swift */,
@@ -398,6 +403,15 @@
 				6E6240C52BC2DE78005660C8 /* DownloadWebView.swift */,
 			);
 			path = DownloadWebView;
+			sourceTree = "<group>";
+		};
+		6E6240C72BC374E4005660C8 /* SearchDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				6E6240C82BC374F3005660C8 /* SearchDetailViewController.swift */,
+				6E6240CA2BC37504005660C8 /* SearchDetailViewModel.swift */,
+			);
+			path = SearchDetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -492,6 +506,7 @@
 				6E6240C32BC2D82A005660C8 /* DefaultValueProvidable.swift in Sources */,
 				6E6240912BBFFCF3005660C8 /* LogManager.swift in Sources */,
 				6E62405B2BBFE945005660C8 /* KSAsset.swift in Sources */,
+				6E6240CB2BC37504005660C8 /* SearchDetailViewModel.swift in Sources */,
 				6E6240972BC00AF1005660C8 /* MainTabBarCoordinator.swift in Sources */,
 				6E6240842BBFFBB8005660C8 /* AppError.swift in Sources */,
 				6E6240982BC00AF1005660C8 /* MainTabBarPage.swift in Sources */,
@@ -516,6 +531,7 @@
 				6E6240A72BC02BCA005660C8 /* AppRepository.swift in Sources */,
 				6E62405D2BBFE9B9005660C8 /* KSButton.swift in Sources */,
 				6E62408C2BBFFC42005660C8 /* UINavigationController+.swift in Sources */,
+				6E6240C92BC374F3005660C8 /* SearchDetailViewController.swift in Sources */,
 				6E62402C2BBFE3E9005660C8 /* SceneDelegate.swift in Sources */,
 				6E6240782BBFF830005660C8 /* RxBaseViewController.swift in Sources */,
 				6E6240A12BC01E56005660C8 /* SearchViewController.swift in Sources */,
