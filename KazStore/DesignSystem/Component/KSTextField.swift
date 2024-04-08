@@ -12,6 +12,7 @@ final class KSTextField: UITextField {
   
   private let underLine = UIView().configured {
     $0.backgroundColor = KSAsset.Color.secondary
+    $0.isHidden = true
   }
   
   init(placeholder: String? = nil, style: Style) {
@@ -23,7 +24,6 @@ final class KSTextField: UITextField {
     self.autocorrectionType = .no
     self.spellCheckingType = .no
     self.tintColor = KSAsset.Color.primary
-    self.addSubview(underLine)
     
     switch style {
       case .search:
@@ -33,6 +33,7 @@ final class KSTextField: UITextField {
         self.leftViewMode = .always
     }
     
+    self.addSubview(underLine)
     underLine.snp.makeConstraints { make in
       make.horizontalEdges.equalTo(self)
       make.bottom.equalTo(self)
