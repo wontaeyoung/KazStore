@@ -17,6 +17,8 @@ final class SearchTableCell: RxBaseTableViewCell {
   private let appIconImageView = UIImageView().configured {
     $0.clipsToBounds = true
     $0.layer.cornerRadius = 10
+    $0.layer.borderColor = KSAsset.Color.lightGrayBackground.cgColor
+    $0.layer.borderWidth = 1
   }
   private let appNameLabel = KSLabel(style: .primary)
   private let downloadButton = KSButton(style: .tag, title: "받기")
@@ -45,8 +47,8 @@ final class SearchTableCell: RxBaseTableViewCell {
     downloadButton.snp.makeConstraints { make in
       make.trailing.equalTo(contentView).inset(20)
       make.centerY.equalTo(contentView)
-      make.width.equalTo(60)
-      make.height.equalTo(30)
+      make.width.equalTo(54)
+      make.height.equalTo(27)
     }
   }
   
