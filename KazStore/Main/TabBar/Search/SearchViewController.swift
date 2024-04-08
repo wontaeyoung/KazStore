@@ -36,22 +36,25 @@ final class SearchViewController: RxBaseViewController, ViewModelController {
   }
   
   // MARK: - Life Cycle
+  override func viewDidLayoutSubviews() {
+    searchField.snp.makeConstraints { make in
+      make.width.equalTo(view)
+      make.height.equalTo(35)
+    }
+  }
+  
   override func setHierarchy() {
     view.addSubviews(searchField, searchResultTableView)
   }
   
   override func setConstraint() {
-    searchField.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.horizontalEdges.equalTo(view).inset(20)
-      make.height.equalTo(35)
-    }
-    
     searchResultTableView.snp.makeConstraints { make in
-      make.top.equalTo(searchField.snp.bottom)
-      make.horizontalEdges.equalTo(view)
-      make.bottom.equalTo(view.safeAreaLayoutGuide)
+      make.edges.equalTo(view.safeAreaLayoutGuide)
     }
+  }
+  
+  override func setAttribute() {
+    navigationItem.titleView = searchField
   }
   
   override func bind() {
