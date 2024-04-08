@@ -10,6 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import CollectionViewPagingLayout
 
 final class SearchDetailViewController: RxBaseViewController, ViewModelController {
   
@@ -30,6 +31,13 @@ final class SearchDetailViewController: RxBaseViewController, ViewModelControlle
   private let releaseTitleLabel = KSLabel(style: .primary, title: "새로운 소식")
   private let releaseVersionLabel = KSLabel(style: .caption)
   private let releaseIntroductionLabel = KSLabel(style: .content, line: 0)
+  
+  private let layout = CollectionViewPagingLayout()
+  private lazy var screenshotCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).configured {
+    $0.isPagingEnabled = true
+    $0.register(AppScreenshotCollectionCell.self, forCellWithReuseIdentifier: AppScreenshotCollectionCell.identifier)
+    $0.showsHorizontalScrollIndicator = false
+  }
   
   private let appDescriptionTitleLabel = KSLabel(style: .primary, title: "앱 소개")
   private let appDescriptionContentLabel = KSLabel(style: .content, line: 0)
@@ -60,6 +68,7 @@ final class SearchDetailViewController: RxBaseViewController, ViewModelControlle
       releaseTitleLabel,
       releaseVersionLabel,
       releaseIntroductionLabel,
+      screenshotCollectionView,
       appDescriptionTitleLabel,
       appDescriptionContentLabel
     )
@@ -118,8 +127,14 @@ final class SearchDetailViewController: RxBaseViewController, ViewModelControlle
       make.horizontalEdges.equalTo(contentView)
     }
     
+    screenshotCollectionView.snp.makeConstraints { make in
+      make.top.equalTo(releaseIntroductionLabel.snp.bottom)
+      make.horizontalEdges.equalTo(view)
+      make.height.equalTo(screenshotCollectionView.snp.width).multipliedBy(1.5)
+    }
+    
     appDescriptionTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(releaseIntroductionLabel.snp.bottom).offset(20)
+      make.top.equalTo(screenshotCollectionView.snp.bottom).offset(20)
       make.horizontalEdges.equalTo(contentView)
     }
     
@@ -140,7 +155,14 @@ final class SearchDetailViewController: RxBaseViewController, ViewModelControlle
   }
   
   override func bind() {
-    
+    Observable.just(app.screenshotUrls)
+      .map {
+        $0.map { URL(string: $0) }
+      }
+      .bind(to: screenshotCollectionView.rx.items(cellIdentifier: AppScreenshotCollectionCell.identifier, cellType: AppScreenshotCollectionCell.self)) { item, element, cell in
+        cell.updateUI(url: element)
+      }
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Method
