@@ -45,9 +45,13 @@ enum KSAsset {
       return UIFont(name: fontName.name, size: size) ?? .systemFont(ofSize: size, weight: coalesceWeight)
     }
     
-    static let ksPrimaryButtonTitle: UIFont = font(.bold, size: 19)
+    static let ksPrimaryButtonTitle: UIFont = font(.medium, size: 17)
+    
     static let ksSearchField: UIFont = font(.medium, size: 15)
     static let ksPrimaryLabel: UIFont = font(.bold, size: 17)
+    static let ksCaptionLabel: UIFont = font(.medium, size: 13)
+    static let ksContentLabel: UIFont = font(.medium, size: 15)
+    
     static let ksToastTitle: UIFont = font(.bold, size: 15)
     static let ksToastMessage: UIFont = font(.medium, size: 13)
   }

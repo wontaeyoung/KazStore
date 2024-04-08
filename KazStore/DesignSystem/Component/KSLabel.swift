@@ -36,6 +36,18 @@ class KSLabel: UILabel {
           $0.font = KSAsset.Font.ksPrimaryLabel
           $0.textColor = KSAsset.Color.label
         }
+        
+      case .caption:
+        self.configure {
+          $0.font = KSAsset.Font.ksCaptionLabel
+          $0.textColor = KSAsset.Color.lightGrayForeground
+        }
+        
+      case .content:
+        self.configure {
+          $0.font = KSAsset.Font.ksContentLabel
+          $0.textColor = KSAsset.Color.label
+        }
     }
   }
   
@@ -49,6 +61,8 @@ extension KSLabel {
   
   enum Style {
     case primary
+    case caption
+    case content
   }
   
   func applyLineSpacing() {
