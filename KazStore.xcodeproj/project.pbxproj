@@ -61,6 +61,8 @@
 		6E6240C62BC2DE78005660C8 /* DownloadWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240C52BC2DE78005660C8 /* DownloadWebView.swift */; };
 		6E6240C92BC374F3005660C8 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240C82BC374F3005660C8 /* SearchDetailViewController.swift */; };
 		6E6240CB2BC37504005660C8 /* SearchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240CA2BC37504005660C8 /* SearchDetailViewModel.swift */; };
+		6E6240DC2BC3B2C6005660C8 /* CollectionViewPagingLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 6E6240DB2BC3B2C6005660C8 /* CollectionViewPagingLayout */; };
+		6E6240DF2BC3B4AA005660C8 /* AppScreenshotCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6240DE2BC3B4AA005660C8 /* AppScreenshotCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +117,7 @@
 		6E6240C52BC2DE78005660C8 /* DownloadWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadWebView.swift; sourceTree = "<group>"; };
 		6E6240C82BC374F3005660C8 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		6E6240CA2BC37504005660C8 /* SearchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewModel.swift; sourceTree = "<group>"; };
+		6E6240DE2BC3B4AA005660C8 /* AppScreenshotCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppScreenshotCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,7 @@
 				6E6240682BBFF211005660C8 /* SnapKit in Frameworks */,
 				6E62407F2BBFF8FD005660C8 /* RxAlamofire in Frameworks */,
 				6E6240BA2BC2D677005660C8 /* Kingfisher in Frameworks */,
+				6E6240DC2BC3B2C6005660C8 /* CollectionViewPagingLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,12 +341,12 @@
 		6E62409D2BC01E3C005660C8 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				6E6240C72BC374E4005660C8 /* SearchDetailView */,
 				6E6240BB2BC2D68D005660C8 /* Cell */,
 				6E62409E2BC01E41005660C8 /* Coordinator */,
 				6E6240A02BC01E56005660C8 /* SearchViewController.swift */,
 				6E6240A42BC021C1005660C8 /* SearchViewModel.swift */,
 				6E6240C42BC2DE5F005660C8 /* DownloadWebView */,
+				6E6240C72BC374E4005660C8 /* SearchDetailView */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -408,10 +412,19 @@
 		6E6240C72BC374E4005660C8 /* SearchDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				6E6240DD2BC3B498005660C8 /* Cell */,
 				6E6240C82BC374F3005660C8 /* SearchDetailViewController.swift */,
 				6E6240CA2BC37504005660C8 /* SearchDetailViewModel.swift */,
 			);
 			path = SearchDetailView;
+			sourceTree = "<group>";
+		};
+		6E6240DD2BC3B498005660C8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6E6240DE2BC3B4AA005660C8 /* AppScreenshotCollectionCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,6 +449,7 @@
 				6E6240812BBFF9B3005660C8 /* RxRealm */,
 				6E6240932BBFFD2B005660C8 /* Toast */,
 				6E6240B92BC2D677005660C8 /* Kingfisher */,
+				6E6240DB2BC3B2C6005660C8 /* CollectionViewPagingLayout */,
 			);
 			productName = KazStore;
 			productReference = 6E6240262BBFE3E9005660C8 /* KazStore.app */;
@@ -471,6 +485,7 @@
 				6E6240802BBFF9B3005660C8 /* XCRemoteSwiftPackageReference "RxRealm" */,
 				6E6240922BBFFD2B005660C8 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				6E6240B82BC2D677005660C8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				6E6240DA2BC3B2C6005660C8 /* XCRemoteSwiftPackageReference "CollectionViewPagingLayout" */,
 			);
 			productRefGroup = 6E6240272BBFE3E9005660C8 /* Products */;
 			projectDirPath = "";
@@ -507,6 +522,7 @@
 				6E6240912BBFFCF3005660C8 /* LogManager.swift in Sources */,
 				6E62405B2BBFE945005660C8 /* KSAsset.swift in Sources */,
 				6E6240CB2BC37504005660C8 /* SearchDetailViewModel.swift in Sources */,
+				6E6240DF2BC3B4AA005660C8 /* AppScreenshotCollectionCell.swift in Sources */,
 				6E6240972BC00AF1005660C8 /* MainTabBarCoordinator.swift in Sources */,
 				6E6240842BBFFBB8005660C8 /* AppError.swift in Sources */,
 				6E6240982BC00AF1005660C8 /* MainTabBarPage.swift in Sources */,
@@ -819,6 +835,14 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		6E6240DA2BC3B2C6005660C8 /* XCRemoteSwiftPackageReference "CollectionViewPagingLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amirdew/CollectionViewPagingLayout";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -846,6 +870,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6E6240B82BC2D677005660C8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		6E6240DB2BC3B2C6005660C8 /* CollectionViewPagingLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E6240DA2BC3B2C6005660C8 /* XCRemoteSwiftPackageReference "CollectionViewPagingLayout" */;
+			productName = CollectionViewPagingLayout;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
