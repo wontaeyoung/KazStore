@@ -45,7 +45,8 @@ final class SearchTableCell: RxBaseTableViewCell {
     downloadButton.snp.makeConstraints { make in
       make.trailing.equalTo(contentView).inset(20)
       make.centerY.equalTo(contentView)
-      make.width.equalTo(80)
+      make.width.equalTo(60)
+      make.height.equalTo(30)
     }
   }
   
